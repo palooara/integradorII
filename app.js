@@ -12,7 +12,7 @@ const app = express();
 //3.Aplicamos los middlewares
 app.use(morgan('dev')); //registrar las peticiones HTTP en la consola
 app.use(express.json()); //parsear el cuerpo de las peticiones a JSON
-let contactos = []; //array para almacenar los contactos
+
 
 app.use(express.urlencoded({ extended: true })); //parsear el cuerpo de las peticiones a URL-encoded
 
@@ -23,6 +23,8 @@ app.set('view engine', 'hbs');
 
 // 5. Configuramos las rutas de hbs
 app.set('views', path.join(__dirname, 'views')); //configurar la carpeta de vistas
+
+hbs.registerPartials(path.join(__dirname, 'views/partials'));
 
 // 6. Importamos las rutas
 const pagesRouter = require('./routes/pagesRouter');
