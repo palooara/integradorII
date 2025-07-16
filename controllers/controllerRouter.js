@@ -1,5 +1,5 @@
 const homeApp = (req, res) => {
-    res.render('index');
+    res.render('index', {styles: '<link rel="stylesheet" href="/css/estilos_index.css">'});
 };
 const altaApp = (req, res) => {
     res.render('alta');

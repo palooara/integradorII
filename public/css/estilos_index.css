@@ -1,0 +1,26 @@
+.card{
+    background-color: #ffe2ea;
+    color: #f44ab3;
+    border-color: #f44ab3;
+}
+
+.card-header {
+    background-color: #f752b8d2;
+    color: white;
+}
+
+.btn-primary {
+    background-color: #f44ab3;
+    border-color: #f44ab3;
+    margin-top: 10px;
+    font-size: 12px;
+}
+
+.btn-primary:hover {
+    background-color: #e33a9c;
+    border-color: #e33a9c;
+}
+
+.card-body{
+    padding: 25px;
+}

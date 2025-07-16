@@ -1,127 +1,203 @@
 <main>
-    <h1>Combos </h1>
+    <h1 style="text-align: center; margin-top:20px; margin-bottom:10px;"> Combos </h1>
 
-    <div class="row mt-3" id="combosBasicos">
-        <div class="col card text-center" id="combo1">
-            <div class="card-header">
-                <h5>Manos de Ángel</h5>
-            </div> 
-            <p>Manicura tradicional + esmaltado clásico</p>
-            <a href=""> <button>Agendar turno</button></a>
+    <div class="container">
+        <div class="row mt-3 " id="combosBasicos">
+            <div class="col">
+                <div class="card text-center" style="margin: 10px" id="combo1">
+                    <div class="card-header ">
+                        <h5>Manos de Ángel</h5>
+                    </div>
+                    <div class="card-body px-5">
+                        <p class="card-text mb-3">Manicura tradicional + esmaltado clásico</p>
+                        <a href=""> <button class="btn btn-primary">Agendar turno</button></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card text-center" style="margin: 10px" id="combo2">
+                    <div class="card-header">
+                        <h5>Rápida y Bella</h5>
+                    </div>
+                    <div class="card-body px-5">
+                        <p class="card-text mb-3">Manicura express + esmaltado semipermanente</p>
+                        <a href=""> <button class="btn btn-primary">Agendar turno</button></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card text-center" style="margin: 10px" id="combo3">
+                    <div class="card-header">
+                        <h5>Pies de seda</h5>
+                    </div>
+                    <div class="card-body px-5">
+                        <p class="card-text mb-3">Pedicura tradicional + esmalte clásico</p>
+                        <a href=""> <button class="btn btn-primary">Agendar turno</button></a>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col card text-center" id="combo2">
-            <div class="card-header">
-                <h5>Rápida y Bella</h5>
-            </div> 
-            <p>Manicura express + esmaltado semipermanente</p>
-            <a href=""> <button>Agendar turno</button></a>
+
+        <div class="row" id="combosIntermedios">
+            <div class="col">
+                <div class="card text-center" style="margin: 10px" id="combo4">
+                    <div class="card-header">
+                        <h5>Dúo Perfecto</h5>
+                    </div>
+                    <div class="card-body px-5">
+                        <p class="card-text mb-3">Manicura + Pedicura + esmaltado semipermanente</p>
+                        <a href=""> <button class="btn btn-primary">Agendar turno</button></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card text-center" style="margin: 10px" id="combo5">
+                    <div class="card-header">
+                        <h5>Uñas de Acero</h5>
+                    </div>
+                    <div class="card-body px-5">
+                        <p class="card-text mb-3">Manicura + refuerzo con gel o acrílico</p>
+                        <a href=""> <button class="btn btn-primary">Agendar turno</button></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card text-center" style="margin: 10px" id="combo6">
+                    <div class="card-header">
+                        <h5>Soft Touch</h5>
+                    </div>
+                    <div class="card-body px-5">
+                        <p class="card-text mb-3">Manicura + exfoliación + hidratación + masaje</p>
+                        <a href=""> <button class="btn btn-primary">Agendar turno</button></a>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col card text-center" id="combo3">
-            <div class="card-header">
-                <h5>Pies de seda</h5>
-            </div> 
-            <p>Pedicura tradicional + esmalte clásico</p>
-            <a href=""> <button>Agendar turno</button></a>
+
+        <div class="row" id="combosPremium">
+            <div class="col">
+                <div class="card text-center" style="margin: 10px" id="combo7">
+                    <div class="card-header">
+                        <h5>Relax & Glow</h5>
+                    </div>
+                    <div class="card-body px-5">
+                        <p class="card-text mb-3">Manicura + Pedicura + masaje + parafina</p>
+                        <a href=""> <button class="btn btn-primary">Agendar turno</button></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card text-center" style="margin: 10px" id="combo8">
+                    <div class="card-header">
+                        <h5>Nails Queen</h5>
+                    </div>
+                    <div class="card-body px-5">
+                        <p class="card-text mb-3">Extensión de uñas + nail art personalizado</p>
+                        <a href=""> <button class="btn btn-primary">Agendar turno</button></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card text-center" style="margin: 10px" id="combo9">
+                    <div class="card-header">
+                        <h5>Momento Zen</h5>
+                    </div>
+                    <div class="card-body px-3">
+                        <p class="card-text mb-3">Manicura + Pedicura + aromaterapia + tratamiento hidratante</p>
+                        <a href=""> <button class="btn btn-primary">Agendar turno</button></a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="row gx-5" id="combosIntermedios">
-        <div class="col card text-center" id="combo4">
-            <div class="card-header">
-                <h5>Dúo Perfecto</h5>
-            </div> 
-            <p>Manicura + Pedicura + esmaltado semipermanente</p>
-            <a href=""> <button>Agendar turno</button></a>
-        </div>
-        <div class="col card text-center" id="combo5">
-            <div class="card-header">
-                <h5>Uñas de Acero</h5>
-            </div> 
-            <p>Manicura + refuerzo con gel o acrílico</p>
-            <a href=""> <button>Agendar turno</button></a>
-        </div>
-        <div class="col card text-center" id="combo6">
-            <div class="card-header">
-                <h5>Soft Touch</h5>
-            </div> 
-            <p>Manicura + exfoliación + hidratación + masaje</p>
-            <a href=""> <button>Agendar turno</button></a>
+
+
+    <h1 style="text-align: center; margin-top:20px; margin-bottom:10px;">Ocasiones Únicas</h1>
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="card text-center " style="margin: 10px" id="combo10">
+                    <div class="card-header">
+                        <h5>Bride to Be</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text mb-3">Manicura + Pedicura + diseño personalizado + exfoliación</p>
+                        <a href=""> <button class="btn btn-primary">Agendar turno</button></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card text-center" style="margin: 10px" id="combo11">
+                    <div class="card-header">
+                        <h5>Party Nails</h5>
+                    </div>
+                    <div class="card-body px-3">
+                        <p class="card-text mb-3"> Uñas con glitter + pedicura con esmalte neón</p>
+                        <a href=""> <button class="btn btn-primary">Agendar turno</button></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card text-center" style="margin: 10px" id="combo12">
+                    <div class="card-header">
+                        <h5>Besties Time</h5>
+                    </div>
+                    <div class="card-body px-5">
+                        <p class="card-text mb-3">Manicura + Pedicura para dos con copa de espumante</p>
+                        <a href=""> <button class="btn btn-primary">Agendar turno</button></a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="row" id="combosPremium">
-        <div class="col card text-center" id="combo7">
-            <div class="card-header">
-                <h5>Relax & Glow</h5>
-            </div> 
-            <p>Manicura + Pedicura + masaje + parafina</p>
-            <a href=""> <button>Agendar turno</button></a>
-        </div>
-        <div class="col card text-center" id="combo8">
-            <div class="card-header">
-                <h5>Nails Queen</h5>
-            </div> 
-            <p>Extensión de uñas + nail art personalizado</p>
-            <a href=""> <button>Agendar turno</button></a>
-        </div>
-        <div class="col card text-center" id="combo9">
-            <div class="card-header">
-                <h5>Momento Zen</h5>
-            </div> 
-            <p>Manicura + Pedicura + aromaterapia + tratamiento hidratante</p>
-            <a href=""> <button>Agendar turno</button></a>
+
+    <h1 style="text-align: center; margin-top:20px; margin-bottom:10px;">Promociones y Packs Especiales</h1>
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="card text-center" style="margin: 10px" id="combo13">
+                    <div class="card-header">
+                        <h5>Spa Monday</h5>
+                    </div>
+                    <div class="card-body px-5">
+                        <p class="card-text mb-3">Manicura + tratamiento hidratante con descuento</p>
+                        <a href=""> <button class="btn btn-primary">Agendar turno</button></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card text-center" style="margin: 10px" id="combo14">
+                    <div class="card-header">
+                        <h5>Triple Glam</h5>
+                    </div>
+                    <div class="card-body px-3">
+                        <p class="card-text mb-3">3 sesiones de manicura semipermanente a precio especial</p>
+                        <a href=""> <button class="btn btn-primary">Agendar turno</button></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card text-center" style="margin: 10px" id="combo15">
+                    <div class="card-header">
+                        <h5>Happy Hour Nails</h5>
+                    </div>
+                    <div class="card-body px-5">
+                        <p class="card-text mb-3">Descuento en ciertos horarios del día</p>
+                        <a href=""> <button class="btn btn-primary">Agendar turno</button></a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <h1>Ocasiones Únicas</h1>
-
-    <div class="row gx-5">
-        <div class="col card text-center" id="combo10">
-            <div class="card-header">
-                <h5>Bride to Be</h5>
-            </div> 
-            <p>Manicura + Pedicura + diseño personalizado + exfoliación</p>
-            <a href=""> <button>Agendar turno</button></a>
-        </div>
-        <div class="col card text-center" id="combo11">
-            <div class="card-header">
-                <h5>Party Nails</h5>
-            </div> 
-            <p> Uñas con glitter + pedicura con esmalte neón</p>
-            <a href=""> <button>Agendar turno</button></a>
-        </div>
-        <div class="col card text-center" id="combo12">
-            <div class="card-header">
-                <h5>Besties Time</h5>
-            </div> 
-            <p>Manicura + Pedicura para dos con copa de espumante</p>
-            <a href=""> <button>Agendar turno</button></a>
-        </div>
-    </div>
-
-    <h1>Promociones y Packs Especiales</h1>
-
-    <div class="row gx-5">
-        <div class="col card text-center" id="combo13">
-            <div class="card-header">
-                <h5>Spa Monday</h5>
-            </div> 
-            <p>Manicura + tratamiento hidratante con descuento</p>
-            <a href=""> <button>Agendar turno</button></a>
-        </div>
-        <div class="col card text-center" id="combo14">
-            <div class="card-header">
-                <h5>Triple Glam</h5>
-            </div> 
-            <p>3 sesiones de manicura semipermanente a precio especial</p>
-            <a href=""> <button>Agendar turno</button></a>
-        </div>
-        <div class="col card text-center" id="combo15">
-            <div class="card-header">
-                <h5>Happy Hour Nails</h5>
-            </div> 
-            <p>Descuento en ciertos horarios del día</p>
-            <a href=""> <button>Agendar turno</button></a>
-        </div>
-    </div>
 </main>
