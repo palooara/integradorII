@@ -1,15 +1,39 @@
-    <main>
-        <form action="">
-            <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre" name="nombre" pattern="^([A-Za-zÑñÁáÉéÍíÓóÚú]+['\-]{0,1}[A-Za-zÑñÁáÉéÍíÓóÚú]+)(\s+([A-Za-zÑñÁáÉéÍíÓóÚú]+['\-]{0,1}[A-Za-zÑñÁáÉéÍíÓóÚú]+))*$" required>
-            <br> <br>
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" pattern="^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$" required>
-            <br> <br>
-            <label for="mensaje">Comentarios:</label>
-            <br>
-            <textarea name="comentarios" id="comentarios" cols="30" rows="10"></textarea>
-            <br> <br>
-            <button type="submit">Enviar</button>
-        </form>
-    </main>
+<main class="container my-5">
+  <form>
+
+    <div class="mb-3">
+      <label for="nombre" class="form-label">Nombre:</label>
+      <input
+        type="text"
+        id="nombre"
+        name="nombre"
+        class="form-control"
+        pattern="^([A-Za-zÑñÁáÉéÍíÓóÚú]+['\-]{0,1}[A-Za-zÑñÁáÉéÍíÓóÚú]+)(\s+([A-Za-zÑñÁáÉéÍíÓóÚú]+['\-]{0,1}[A-Za-zÑñÁáÉéÍíÓóÚú]+))*$"
+        required>
+    </div>
+
+    <div class="mb-3">
+      <label for="email" class="form-label">Email:</label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        class="form-control"
+        pattern="^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$"
+        required>
+    </div>
+
+    <div class="mb-3">
+      <label for="comentarios" class="form-label">Comentarios:</label>
+      <textarea
+        name="comentarios"
+        id="comentarios"
+        class="form-control"
+        rows="6"
+        required></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Enviar</button>
+
+  </form>
+</main>
