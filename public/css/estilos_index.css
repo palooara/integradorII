@@ -1,19 +1,31 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+
 .card{
-    background-color: #ffe2ea;
+    background-color: #fffdfd;
     color: #f44ab3;
     border-color: #f44ab3;
+    font-family: 'Montserrat', sans-serif;
+    font-size: small;
+}
+.card:hover{
+    transform: scaleX(1.05) scaleY(1.05);
 }
 
 .card-header {
-    background-color: #f752b8d2;
+    background-color: #ff6ac6;
     color: white;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .btn-primary {
-    background-color: #f44ab3;
+    background-color: #ff6ac6d2;
     border-color: #f44ab3;
     margin-top: 10px;
     font-size: 12px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: small;
 }
 
 .btn-primary:hover {
@@ -23,4 +35,8 @@
 
 .card-body{
     padding: 25px;
+}
+
+h1{
+    font-family: 'Montserrat', sans-serif;
 }
