@@ -1,5 +1,5 @@
 <main class="container my-5">
-  <form>
+  <form class="formulario-contacto" method="post" action="/api">
 
     <div class="mb-3">
       <label for="nombre" class="form-label">Nombre:</label>
@@ -23,6 +23,17 @@
         required>
     </div>
 
+    <div class="mb-3">
+      <label for="telefono" class="form-label">Teléfono:</label>
+      <input
+        type="tel"
+        id="telefono"
+        name="telefono"
+        class="form-control"
+        pattern="^\+?[0-9\s\-()]{7,15}$"
+        required>
+    </div>
+    
     <div class="mb-3">
       <label for="comentarios" class="form-label">Comentarios:</label>
       <textarea
