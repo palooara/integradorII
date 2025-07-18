@@ -5,6 +5,7 @@ const express = require('express'); //framework para crear servidores
 const morgan = require('morgan');// middleware para registrar las peticiones HTTP
 const hbs = require('hbs');// motor de plantillas para renderizar html
 const path = require('path'); //librería para trabajar con rutas
+const apiRouter = require('./routes/datosProductoRouter'); //rutas de la API
 
 //2.Creamos el servidor
 const app = express(); 
@@ -31,6 +32,7 @@ const pagesRouter = require('./routes/pagesRouter');
 
 //7. Usamos las rutas
 app.use('/', pagesRouter);
+app.use('/api', apiRouter); //rutas de la API
 
 //8. Middleware para manejar errores 404 y 500
 // Middleware para manejar rutas no encontradas

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 // Definimos el esquema para los datos de productos
-productosSchema = new mongoose.Schema({
+productoSchema = new mongoose.Schema({
 
     nombre: {
         type: String,
@@ -24,3 +24,7 @@ productosSchema = new mongoose.Schema({
     }
 
 });
+
+const datosProducto = mongoose.model("productos", productoSchema);
+
+module.exports = datosProducto;

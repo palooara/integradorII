@@ -15,10 +15,15 @@
 }
 
 .card-header {
-    background-color: #ff6ac6;
+    background-color: #ff6ac6; /* color rosa */
     color: white;
     font-family: 'Montserrat', sans-serif;
+    padding: 10px 0; /* Ajusta el padding para que no haya mucho espacio */
+    margin-bottom: 0; /* Elimina cualquier margen que pueda existir */
+    width: 100%; /* Asegura que ocupe todo el ancho */
+    text-align: center; /* Centra el texto */
 }
+
 
 .btn-primary {
     background-color: #ff6ac6d2;
