@@ -24,10 +24,33 @@
     text-align: center; /* Centra el texto */
 }
 
-
 .btn-primary {
     background-color: #ff6ac6d2;
     border-color: #f44ab3;
+    margin-top: 10px;
+    font-size: 12px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: small;
+}
+.text-primary {
+    color: #ffedf8;
+}
+
+
+.modal-content{
+    background-color: #fff8fd;
+    color: #f44ab3;
+    font-family: 'Montserrat', sans-serif;
+}
+.modal-header {
+    background-color: #f8cbe9;
+    color: #f44ab3;
+    font-family: 'Montserrat', sans-serif;
+    font-size: small;
+}
+.btn-danger {
+    background-color: #bb1d7fd2;
+    border-color: #db3e9f;
     margin-top: 10px;
     font-size: 12px;
     font-family: 'Montserrat', sans-serif;
@@ -46,6 +69,6 @@
 h1{
     font-family: 'Montserrat', sans-serif;
     text-align: center; 
-    margin-top:25px; 
-    margin-bottom:20px;
+    margin-top:15px; 
+    margin-bottom:25px;
 }

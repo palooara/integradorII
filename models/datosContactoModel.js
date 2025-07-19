@@ -19,12 +19,17 @@ const datosContactoSchema = new mongoose.Schema({
         required: true
     },
 
+    fecha: {
+        type: Date,
+        default: Date.now // Fecha por defecto al momento de crear el contacto
+    },
+
     comentarios: {
         type: String,
         required: true
     }
 });
 
-const datosContacto = mongoose.model("contacto", datosContactoSchema);
+const datosContacto = mongoose.model("contactos", datosContactoSchema);
 
 module.exports = datosContacto;

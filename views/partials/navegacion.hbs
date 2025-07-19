@@ -1,4 +1,4 @@
-<nav class="py-2" style="background-color: #ff6ac6; margin-bottom: 20px;">
+<nav class="py-2" style="background-color: #ff6ac6; margin-bottom: 10px;">
   <div class="container">
     <div class="row align-items-center">
 
@@ -12,18 +12,18 @@
       <!-- Columna central con logo centrado -->
       <div class="col text-center">
         <a class="nav-link d-inline-block" href="/">
-          <img src="/images/logo.png" alt="Logo" style="width: 60px; height: 70px;">
+          <img src="/images/logo.png" alt="Logo" style="width: 60px; height: 70px;" />
         </a>
       </div>
 
       <!-- Columna derecha -->
       <div class="col d-flex justify-content-end align-items-center gap-3">
-        <input class="form-control form-control-sm w-auto" type="text" placeholder="Buscar">
-        <a href="/carrito" class="position-relative text-white fs-2">
+        {{!-- <input class="form-control form-control-sm w-auto" type="text" placeholder="Buscar" /> --}}
+        <button class="btn btn-pink position-relative text-white fs-2 rounded-circle" id="btnCarrito"
+          style="width: 60px; height: 60px;">
           <i class="bi bi-cart"></i>
-        </a>
+        </button>
       </div>
-
     </div>
   </div>
 </nav>

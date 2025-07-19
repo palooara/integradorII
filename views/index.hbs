@@ -1,266 +1,58 @@
-<main class="container my-5">
-  <h1 class="text-center">Productos</h1>
+<main class="container my-3">
+  <h1 class="text-center">Servicios</h1>
 
   {{#if error}}
-  <div class="alert alert-danger text-center">{{error}}</div>
+    <div class="alert alert-danger text-center">{{error}}</div>
   {{/if}}
 
   <div class="row justify-content-center">
     {{#each productos}}
-    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 d-flex">
-      <div class="card w-100">
-        <div class="card-header text-center">
-          <h5 class="mb-0">{{nombre}}</h5>
-        </div>
-        <div class="card-body text-center">
-          <p class="card-text">{{descripcion}}</p>
-          <p class="card-text">${{precio}}</p>
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 d-flex">
+        <div class="card w-100">
+          <div class="card-header text-center">
+            <h5 class="mb-0" id="nombreProd">{{nombre}}</h5>
+          </div>
+          <div class="card-body text-center">
+            <p class="card-text">{{descripcion}}</p>
+            <p hidden id="precio" class="card-text">Precio: ${{precio}}</p>
+            <button
+              class="btn btn-primary btn-agregar"
+              data-nombre="{{nombre}}"
+              data-precio="{{precio}}"
+            >
+              Agregar Servicio
+            </button>
+          </div>
         </div>
       </div>
-    </div>
     {{/each}}
 
     {{#unless productos.length}}
-    <p class="text-center text-muted">No hay productos disponibles</p>
+      <p class="text-center text-muted">No hay productos disponibles</p>
     {{/unless}}
   </div>
 </main>
 
 
 
+ <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const botones = document.querySelectorAll(".btn-agregar");
+
+    botones.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const producto = {
+          nombre: btn.dataset.nombre,
+          precio: btn.dataset.precio
+        };
+
+        const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+        carrito.push(producto);
+        localStorage.setItem("carrito", JSON.stringify(carrito));
+        alert(`Servicio ${producto.nombre} agregado al carrito`);
+      });
+    });
+  });
+</script>
 
 
-
-
-
-
-
-
-
-
-
-{{!-- <main>
-    <h1> Combos </h1>
-
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
-        {{#each productos}}
-        <div class="col">
-            <div class="card text-center" style="margin: 10px" id="combo1">
-                <div class="card-header ">
-                    <h5>{{nombre}}</h5>
-                </div>
-                <div class="card-body px-5">
-                    <p class="card-text mb-3">$ {{descripcion}}</p>
-                    <a href=""> <button class="btn btn-primary">Agendar turno</button></a>
-                </div>
-            </div>
-        </div>
-        {{/each}}
-    </div>
-
-
-
-
-
-
-
-    {{!-- <div class="container">
-        <div class="row mt-3 " id="combosBasicos">
-            <div class="col">
-                <div class="card text-center" style="margin: 10px" id="combo1">
-                    <div class="card-header ">
-                        <h5>Manos de Ángel</h5>
-                    </div>
-                    <div class="card-body px-5">
-                        <p class="card-text mb-3">Manicura tradicional + esmaltado clásico</p>
-                        <a href=""> <button class="btn btn-primary">Agendar turno</button></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card text-center" style="margin: 10px" id="combo2">
-                    <div class="card-header">
-                        <h5>Rápida y Bella</h5>
-                    </div>
-                    <div class="card-body px-5">
-                        <p class="card-text mb-3">Manicura express + esmaltado semipermanente</p>
-                        <a href=""> <button class="btn btn-primary">Agendar turno</button></a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="card text-center" style="margin: 10px" id="combo3">
-                    <div class="card-header">
-                        <h5>Pies de seda</h5>
-                    </div>
-                    <div class="card-body px-5">
-                        <p class="card-text mb-3">Pedicura tradicional + esmalte clásico</p>
-                        <a href=""> <button class="btn btn-primary">Agendar turno</button></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row" id="combosIntermedios">
-            <div class="col">
-                <div class="card text-center" style="margin: 10px" id="combo4">
-                    <div class="card-header">
-                        <h5>Dúo Perfecto</h5>
-                    </div>
-                    <div class="card-body px-5">
-                        <p class="card-text mb-3">Manicura + Pedicura + esmaltado semipermanente</p>
-                        <a href=""> <button class="btn btn-primary">Agendar turno</button></a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="card text-center" style="margin: 10px" id="combo5">
-                    <div class="card-header">
-                        <h5>Uñas de Acero</h5>
-                    </div>
-                    <div class="card-body px-5">
-                        <p class="card-text mb-3">Manicura + refuerzo con gel o acrílico</p>
-                        <a href=""> <button class="btn btn-primary">Agendar turno</button></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card text-center" style="margin: 10px" id="combo6">
-                    <div class="card-header">
-                        <h5>Soft Touch</h5>
-                    </div>
-                    <div class="card-body px-5">
-                        <p class="card-text mb-3">Manicura + exfoliación + hidratación + masaje</p>
-                        <a href=""> <button class="btn btn-primary">Agendar turno</button></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row" id="combosPremium">
-            <div class="col">
-                <div class="card text-center" style="margin: 10px" id="combo7">
-                    <div class="card-header">
-                        <h5>Relax & Glow</h5>
-                    </div>
-                    <div class="card-body px-5">
-                        <p class="card-text mb-3">Manicura + Pedicura + masaje + parafina</p>
-                        <a href=""> <button class="btn btn-primary">Agendar turno</button></a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="card text-center" style="margin: 10px" id="combo8">
-                    <div class="card-header">
-                        <h5>Nails Queen</h5>
-                    </div>
-                    <div class="card-body px-5">
-                        <p class="card-text mb-3">Extensión de uñas + nail art personalizado</p>
-                        <a href=""> <button class="btn btn-primary">Agendar turno</button></a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="card text-center" style="margin: 10px" id="combo9">
-                    <div class="card-header">
-                        <h5>Momento Zen</h5>
-                    </div>
-                    <div class="card-body px-3">
-                        <p class="card-text mb-3">Manicura + Pedicura + aromaterapia + tratamiento hidratante</p>
-                        <a href=""> <button class="btn btn-primary">Agendar turno</button></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> --}}
-
-
-
-    {{!-- <h1>Ocasiones Únicas</h1>
-
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <div class="card text-center " style="margin: 10px" id="combo10">
-                    <div class="card-header">
-                        <h5>Bride to Be</h5>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text mb-3">Manicura + Pedicura + diseño personalizado + exfoliación</p>
-                        <a href=""> <button class="btn btn-primary">Agendar turno</button></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card text-center" style="margin: 10px" id="combo11">
-                    <div class="card-header">
-                        <h5>Party Nails</h5>
-                    </div>
-                    <div class="card-body px-4">
-                        <p class="card-text mb-3"> Uñas con glitter + pedicura con esmalte neón</p>
-                        <a href=""> <button class="btn btn-primary">Agendar turno</button></a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="card text-center" style="margin: 10px" id="combo12">
-                    <div class="card-header">
-                        <h5>Besties Time</h5>
-                    </div>
-                    <div class="card-body px-5">
-                        <p class="card-text mb-3">Manicura + Pedicura para dos con copa de espumante</p>
-                        <a href=""> <button class="btn btn-primary">Agendar turno</button></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> --}}
-
-
-    {{!-- <h1>Promociones y Packs Especiales</h1> --}}
-
-    {{!-- <div class="container">
-        <div class="row">
-            <div class="col">
-                <div class="card text-center" style="margin: 10px" id="combo13">
-                    <div class="card-header">
-                        <h5>Spa Monday</h5>
-                    </div>
-                    <div class="card-body px-5">
-                        <p class="card-text mb-3">Manicura + tratamiento hidratante con descuento</p>
-                        <a href=""> <button class="btn btn-primary">Agendar turno</button></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card text-center" style="margin: 10px" id="combo14">
-                    <div class="card-header">
-                        <h5>Triple Glam</h5>
-                    </div>
-                    <div class="card-body px-3">
-                        <p class="card-text mb-3">3 sesiones de manicura semipermanente a precio especial</p>
-                        <a href=""> <button class="btn btn-primary">Agendar turno</button></a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="card text-center" style="margin: 10px" id="combo15">
-                    <div class="card-header">
-                        <h5>Happy Hour Nails</h5>
-                    </div>
-                    <div class="card-body px-5">
-                        <p class="card-text mb-3">Descuento en ciertos horarios del día</p>
-                        <a href=""> <button class="btn btn-primary">Agendar turno</button></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> --}}
-
-</main> --}}
