@@ -27,7 +27,6 @@
 .btn-primary {
     background-color: #ff6ac6d2;
     border-color: #f44ab3;
-    margin-top: 10px;
     font-size: 12px;
     font-family: 'Montserrat', sans-serif;
     font-size: small;
@@ -48,10 +47,9 @@
     font-family: 'Montserrat', sans-serif;
     font-size: small;
 }
-.btn-danger {
+.btn-danger, .btn-warning{
     background-color: #bb1d7fd2;
     border-color: #db3e9f;
-    margin-top: 10px;
     font-size: 12px;
     font-family: 'Montserrat', sans-serif;
     font-size: small;

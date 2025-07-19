@@ -1,59 +1,168 @@
 <main class="container my-5">
-  <form class="formulario" action="/api/alta" method="POST">
+  <form class="formulario" id="formulario" action="/api/productos" method="POST">
 
     <div class="mb-3">
       <label for="nombre" class="form-label">Nombre:</label>
-      <input
-        type="text"
-        id="nombre"
-        name="nombre"
-        class="form-control"
-        minlength="4"
-        required
-      />
+      <input type="text" id="nombre" name="nombre" class="form-control" minlength="4" required />
     </div>
+
+    <input type="hidden" id="mongoId" name="mongoId" />
 
     <div class="mb-3">
       <label for="precio" class="form-label">Precio:</label>
-      <input
-        type="number"
-        id="precio"
-        name="precio"
-        class="form-control"
-        min="0"
-        required
-      />
+      <input type="number" id="precio" name="precio" class="form-control" min="0" required />
     </div>
 
     <div class="mb-3">
       <label for="categoria" class="form-label">Categoría:</label>
-      <input
-        type="text"
-        id="categoria"
-        name="categoria"
-        class="form-control"
-        required
-      />
+      <input type="text" id="categoria" name="categoria" class="form-control" required />
     </div>
 
     <div class="mb-3">
       <label for="descripCorta" class="form-label">Descripción corta:</label>
-      <input
-        type="text"
-        id="descripcion"
-        name="descripcion"
-        class="form-control"
-        minlength="10"
-        required
-      />
+      <input type="text" id="descripcion" name="descripcion" class="form-control" minlength="10" required />
     </div>
 
-    <button
-      type="submit"
-      style="background-color: #ff6ac6d2;
-    border-color: #f44ab3;"
-      class="btn btn-primary"
-    >Enviar</button>
+    <button type="submit" style="background-color: #ff6ac6d2;
+    border-color: #f44ab3;" class="btn btn-primary" id="btnEnviar">Enviar</button>
 
   </form>
+
+  <div class="container mt-5">
+    <h2> Lista de Servicios</h2>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Precio</th>
+          <th scope="col">Categoría</th>
+          <th scope="col">Descripción</th>
+          <th scope="col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody id="tablaProductos">
+        <!-- Aquí se agregarán los contactos mediante JavaScript -->
+      </tbody>
+    </table>
+  </div>
+
 </main>
+
+<script>
+document.getElementById("btnEnviar").addEventListener("click", function(e){
+    e.preventDefault();
+
+    const nombre = document.getElementById("nombre").value;
+    const precio = document.getElementById("precio").value;
+    const categoria = document.getElementById("categoria").value;
+    const descripcion = document.getElementById("descripcion").value;
+    const id = document.getElementById("mongoId").value;
+
+    if (!nombre || !precio || !descripcion || !categoria) {
+        alert("Por favor, completa todos los campos.");
+        return;
+    }
+
+    const producto = {
+        nombre,
+        precio,
+        categoria,
+        descripcion
+    };
+
+    const xhr = new XMLHttpRequest();
+
+    if (id) {
+        // Editar producto existente
+        xhr.open("PUT", `http://localhost:8080/api/productos/${id}`, true);
+    } else {
+        // Crear nuevo producto
+        xhr.open("POST", "http://localhost:8080/api/productos", true);
+    }
+
+    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+
+    xhr.onload = function(){
+        if (xhr.status === 200 || xhr.status === 201) {
+            console.log("Respuesta del servidor:", xhr.responseText);
+            document.getElementById("formulario").reset();
+            document.getElementById("mongoId").value = "";
+            fetchProductosDelServidor();
+        } else {
+            console.error("Error en la petición:", xhr.statusText);
+        }
+    };
+
+    xhr.send(JSON.stringify(producto));
+});
+
+function fetchProductosDelServidor() {
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", "http://localhost:8080/api/productos", true);
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            const productos = JSON.parse(xhr.responseText);
+            const tablaProductos = document.getElementById("tablaProductos");
+            tablaProductos.innerHTML = "";
+
+            productos.forEach(producto => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${producto._id}</td>
+                    <td>${producto.nombre}</td>
+                    <td>$${producto.precio}</td>
+                    <td>${producto.categoria}</td>
+                    <td>${producto.descripcion}</td>
+                    <td>
+                        <button class="btn btn-warning btn-sm editar-btn"
+                            data-id="${producto._id}"
+                            data-nombre="${producto.nombre}"
+                            data-precio="${producto.precio}"
+                            data-categoria="${producto.categoria}"
+                            data-descripcion="${producto.descripcion}"
+                        >Editar
+                        </button>
+                        <button class="btn btn-danger btn-sm eliminar-btn"
+                            data-id="${producto._id}"
+                        >Eliminar</button>
+                    </td>
+                `;
+                tablaProductos.appendChild(row);
+
+                // Editar
+                row.querySelector(".editar-btn").addEventListener("click", (e) => {
+                    document.getElementById("nombre").value = e.target.dataset.nombre;
+                    document.getElementById("precio").value = e.target.dataset.precio;
+                    document.getElementById("categoria").value = e.target.dataset.categoria;
+                    document.getElementById("descripcion").value = e.target.dataset.descripcion;
+                    document.getElementById("mongoId").value = e.target.dataset.id;
+                });
+
+                // Eliminar
+                row.querySelector(".eliminar-btn").addEventListener("click", (e) => {
+                    const idEliminar = e.target.dataset.id;
+                    if (confirm("¿Estás seguro de eliminar este producto?")) {
+                        const xhrDelete = new XMLHttpRequest();
+                        xhrDelete.open("DELETE", `http://localhost:8080/api/productos/${idEliminar}`, true);
+                        xhrDelete.onload = function() {
+                            if (xhrDelete.status === 200) {
+                                fetchProductosDelServidor();
+                            } else {
+                                console.error("Error al eliminar:", xhrDelete.statusText);
+                            }
+                        };
+                        xhrDelete.send();
+                    }
+                });
+            });
+        } else {
+            console.error("Error al obtener los productos:", xhr.statusText);
+        }
+    };
+    xhr.send();
+}
+
+// Ejecutar al cargar la página
+document.addEventListener("DOMContentLoaded", fetchProductosDelServidor);
+</script>
