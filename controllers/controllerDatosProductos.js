@@ -1,5 +1,6 @@
 const datosProducto = require('../models/datosProductosModel');
 
+
 const envioProductos = async (req, res) => { 
     console.log(req.body); 
 
@@ -47,29 +48,35 @@ const eliminarProducto = (req, res) => {
     });
 };
 
+
+
+
 const editarProducto = (req, res) => {
     const id = req.params.id;
-     const { nombre, precio, categoria, descripcion } = req.body;
+    const { nombre, precio, categoria, descripcion } = req.body;
     const producto = {
         nombre,
         precio,
         categoria,
         descripcion
     };
-
+    
     datosProducto.findByIdAndUpdate(id, producto, { new: true })
-        .then((contactoActualizado) => {
-            if (!contactoActualizado) {
-                return res.status(404).send("producto no encontrado");
-            }
-            console.log("producto actualizado en la base de datos");
-            res.status(200).send("producto actualizado en la base de datos"); // Enviar el contacto actualizado como respuesta
-        })
-        .catch(err => {
-            console.error("Error al actualizar el producto", err);
-            res.status(500).send("Error al actualizar el producto");
-        });
+    .then((contactoActualizado) => {
+        if (!contactoActualizado) {
+            return res.status(404).send("producto no encontrado");
+        }
+        console.log("producto actualizado en la base de datos");
+        res.status(200).send("producto actualizado en la base de datos"); // Enviar el contacto actualizado como respuesta
+    })
+    .catch(err => {
+        console.error("Error al actualizar el producto", err);
+        res.status(500).send("Error al actualizar el producto");
+    });
 };
+
+
+
 
 module.exports = {
     envioProductos,

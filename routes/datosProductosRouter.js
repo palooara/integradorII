@@ -3,7 +3,8 @@ const router =  require('express').Router();
 const { envioProductos,
         eliminarProducto,
         editarProducto,
-        traerProductos
+        traerProductos,
+
  } = require('../controllers/controllerDatosProductos');
 
 router.post('/productos', envioProductos);

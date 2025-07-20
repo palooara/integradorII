@@ -5,7 +5,11 @@ const express = require('express'); //framework para crear servidores
 const morgan = require('morgan');// middleware para registrar las peticiones HTTP
 const hbs = require('hbs');// motor de plantillas para renderizar html
 const path = require('path'); //librería para trabajar con rutas
-const apiRouter = require('./routes/datosProductoRouter'); //rutas de la API
+const apiRouter = require('./routes/datosProductosRouter'); //rutas de la API
+const authRouter = require('./routes/authRouter'); //rutas de autenticación
+
+const session = require('express-session');
+
 
 //2.Creamos el servidor
 const app = express(); 
@@ -14,6 +18,17 @@ const app = express();
 app.use(morgan('dev')); //registrar las peticiones HTTP en la consola
 app.use(express.json()); //parsear el cuerpo de las peticiones a JSON
 
+app.use(session({
+  secret: 'clave-super-secreta',
+  resave: false,
+  saveUninitialized: false
+}));
+
+app.use((req, res, next) => {
+  res.locals.usuarioLogueado = req.session.usuarioId || null;
+  res.locals.nombreUsuario = req.session.nombreUsuario || null; // ← Esto también
+  next();
+});
 
 app.use(express.urlencoded({ extended: true })); //parsear el cuerpo de las peticiones a URL-encoded
 
@@ -33,6 +48,9 @@ const pagesRouter = require('./routes/pagesRouter');
 //7. Usamos las rutas
 app.use('/', pagesRouter);
 app.use('/api', apiRouter); //rutas de la API
+app.use('/auth', authRouter); //rutas de autenticación
+const carritoRouter = require('./routes/carritoRouter');
+app.use('/carrito', carritoRouter);
 
 //8. Middleware para manejar errores 404 y 500
 // Middleware para manejar rutas no encontradas

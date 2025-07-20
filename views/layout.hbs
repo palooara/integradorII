@@ -2,39 +2,141 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-
-    <link rel="stylesheet" href="../css/estilos_index.css">
-    <title>Eli Nails Salon</title>
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+  <link rel="stylesheet" href="/css/estilos_index.css" />
+  <title>Eli Nails Salon</title>
 </head>
 
-<body style="background-color:#ffe2ea;
-    color: #f44ab3;">
+<body style="background-color:#ffe2ea; color: #f44ab3;">
+  {{> navegacion}}
+  {{{body}}}
+  {{> carrito}}
+  {{> footer}}
 
-    {{> navegacion}}
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+    crossorigin="anonymous"></script>
 
-    {{{body}}}
-    {{> carrito}}
-    {{> footer}}
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const modalElement = document.getElementById("carritoModal");
+      if (!modalElement) return;
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
-        crossorigin="anonymous"></script>
-    <script>
+      const carritoModal = new bootstrap.Modal(modalElement);
+      const btnCarrito = document.getElementById("btnCarrito");
+      const contenedor = document.getElementById("contenidoCarrito");
+      const totalElement = document.getElementById("totalCarrito");
+      const btnVaciar = document.getElementById("vaciarCarrito");
+      const btnAgendar = document.querySelector(".btn-agendar");
+      
+        document.querySelectorAll(".btn-agregar").forEach(btn => {
+  btn.addEventListener("click", () => {
+    if (!window.usuarioLogueado) {
+      alert("Debés iniciar sesión para agregar productos al carrito.");
+        window.location.href = "/auth/login";
+      return;
+    }
+
+    const nombre = btn.dataset.nombre;
+    const precio = btn.dataset.precio;
+    const descripcion = btn.closest(".card-body").querySelector("p.card-text").textContent;
+
+    const producto = { nombre, precio, descripcion };
+    guardarEnLocalStorage(producto);
+  });
+});
 
 
-    {{{scripts}}}
+      if (btnCarrito) {
+        btnCarrito.addEventListener("click", () => {
+          mostrarCarrito();
+          carritoModal.show();
+        });
+      }
 
+      if (btnVaciar) {
+        btnVaciar.addEventListener("click", () => {
+          localStorage.removeItem("carrito");
+          mostrarCarrito();
+        });
+      }
 
+      function mostrarCarrito() {
+        const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+        if (carrito.length === 0) {
+          contenedor.innerHTML = "<p class='text-muted'>No has seleccionado ningún servicio.</p>";
+          totalElement.textContent = "";
+          btnVaciar.style.display = "none";
+          btnAgendar.style.display = "none";
+          return;
+        }
+
+        btnVaciar.style.display = "inline-block";
+        btnAgendar.style.display = "inline-block";
+
+        let total = 0;
+        contenedor.innerHTML = carrito.map(p => {
+          total += parseFloat(p.precio) || 0;
+          return `
+            <div class="mb-2 border-bottom pb-2">
+              <h6 class="mb-0">${p.nombre}</h6>
+              <small class="text-muted">Precio: $${p.precio}</small>
+            </div>
+          `;
+        }).join("");
+
+        totalElement.textContent = "Total: $" + total.toFixed(2);
+      }
+
+      function guardarEnLocalStorage(producto) {
+        const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+        carrito.push(producto);
+        localStorage.setItem("carrito", JSON.stringify(carrito));
+        alert("Producto agregado al carrito");
+      }
+
+if (btnAgendar) {
+  btnAgendar.addEventListener("click", async () => {
+    const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+    if (carrito.length === 0) {
+      alert("Tu carrito está vacío.");
+      return;
+    }
+
+    try {
+      const res = await fetch("/carrito", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ productos: carrito })
+      });
+
+      if (!res.ok) throw new Error("Error al agendar turno");
+
+      localStorage.removeItem("carrito");         // Limpia localStorage
+      mostrarCarrito();                           // Refresca contenido del modal
+      carritoModal.hide();                        // Cierra modal
+      alert("¡Turno agendado con éxito!");
+    } catch (error) {
+      console.error(error);
+      alert("Hubo un error al agendar el turno");
+    }
+  });
+}
+    
+
+    });
+  </script>
+  <script>
+  window.usuarioLogueado = {{#if usuarioLogueado}}true{{else}}false{{/if}};
+</script>
 </body>
 
 </html>

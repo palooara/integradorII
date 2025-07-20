@@ -3,7 +3,10 @@ const datosProducto = require('../models/datosProductosModel');
 const homeApp = async (req, res) => {
     try {
         const productos = await datosProducto.find(); // ← carga desde Mongo
-        res.render('index', { productos }); // ← los pasa a la vista
+        res.render('index', {
+  productos,
+  usuarioLogueado: req.session.usuarioId ? true : false
+});
     } catch (error) {
         res.status(500).send('Error al cargar productos');
     }
@@ -11,9 +14,7 @@ const homeApp = async (req, res) => {
 const altaApp = (req, res) => {
     res.render('alta');
 };
-const contactoApp = (req, res) => {
-    res.render('contacto');
-};
+
 const nosotrosApp = (req, res) => {
     res.render('nosotros');
 };
@@ -21,6 +22,5 @@ const nosotrosApp = (req, res) => {
 module.exports = {
     homeApp,
     altaApp,
-    contactoApp,
     nosotrosApp
 }

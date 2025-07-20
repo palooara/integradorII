@@ -4,7 +4,12 @@
 
       <!-- Columna izquierda -->
       <div class="col d-flex gap-5">
-        <a class="nav-link text-white pt-1" href="/contacto">Contacto</a>
+        {{#if usuarioLogueado}}
+        <span class="text-white pt-1">{{nombreUsuario}}!</span>
+        <a class="nav-link text-white pt-1" href="/auth/logout">Cerrar sesión</a>
+        {{else}}
+        <a class="nav-link text-white pt-1" href="/auth/login">Iniciar sesión</a>
+        {{/if}}
         <a class="nav-link text-white pt-1" href="/nosotros">Nosotros</a>
         <a class="nav-link text-white pt-1" href="/alta">Alta</a>
       </div>
@@ -19,9 +24,8 @@
       <!-- Columna derecha -->
       <div class="col d-flex justify-content-end align-items-center gap-3">
         {{!-- <input class="form-control form-control-sm w-auto" type="text" placeholder="Buscar" /> --}}
-        <button class="btn btn-pink position-relative text-white fs-2 rounded-circle" id="btnCarrito"
-          style="width: 60px; height: 60px;">
-          <i class="bi bi-cart"></i>
+        <button id="btnCarrito" class="btn btn-outline-light">
+          <i class="bi bi-cart-fill"></i>
         </button>
       </div>
     </div>

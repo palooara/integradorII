@@ -1,78 +1,18 @@
-<div class="modal fade" id="carritoModal" tabindex="-1" aria-labelledby="carritoModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable">
-    <div class="modal-content">
+<div class="modal fade" id="carritoModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content text-dark">
       <div class="modal-header">
-        <h5 class="modal-title" id="carritoModalLabel">Tu carrito</h5>
+        <h5 class="modal-title">Tu Carrito</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
       </div>
-      <div class="modal-body" id="contenidoCarrito">
-        <!-- Productos se insertan por JS -->
-      </div>
-      <div class="modal-footer">
-        <span id="totalCarrito" class="me-auto fw-bold text-primary"></span>
-        <button class="btn btn-danger" id="vaciarCarrito">Vaciar</button>
-        <a href="/contacto" class="btn btn-agendar btn-primary">Agendar</a>
+      <div class="modal-body">
+        <div id="contenidoCarrito"></div>
+        <p id="totalCarrito" class="fw-bold mt-3"></p>
+        <div class="d-flex justify-content-between mt-3">
+          <button id="vaciarCarrito" class="btn btn-danger">Vaciar carrito</button>
+          <button class="btn btn-success btn-agendar">Agendar turno</button>
+        </div>
       </div>
     </div>
   </div>
 </div>
-
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const modalElement = document.getElementById("carritoModal");
-    if (!modalElement) return;
-
-    const carritoModal = new bootstrap.Modal(modalElement);
-    const btnCarrito = document.getElementById("btnCarrito");
-    const contenedor = document.getElementById("contenidoCarrito");
-    const totalElement = document.getElementById("totalCarrito");
-    const btnVaciar = document.getElementById("vaciarCarrito");
-    const btnAgendar = document.querySelector(".btn-agendar");
-
-    if (btnCarrito) {
-      btnCarrito.addEventListener("click", () => {
-        mostrarCarrito();
-        carritoModal.show();
-      });
-    }
-
-    if (btnVaciar) {
-      btnVaciar.addEventListener("click", () => {
-        localStorage.removeItem("carrito");
-        mostrarCarrito();
-      });
-    }
-
-    function mostrarCarrito() {
-      const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-
-      if (carrito.length === 0) {
-        contenedor.innerHTML = "<p class='text-muted'>No has seleccionado ningún servicio.</p>";
-        totalElement.textContent = "";
-     
-          btnVaciar.style.display = "none";
-   
-          btnAgendar.style.display = "none";
-  
-        return;
-      }else {
-        btnVaciar.style.display = "block";
-        btnAgendar.style.display = "block";
-      }
-
-      let total = 0;
-      contenedor.innerHTML = carrito.map(p => {
-        total += parseFloat(p.precio) || 0;
-        return `
-          <div class="mb-2 border-bottom pb-2">
-            <h6 class="mb-0">${p.nombre}</h6>
-            <small class="text-muted">Precio: $${p.precio}</small>
-          </div>
-        `;
-      }).join("");
-
-      totalElement.textContent = "Total: $" + total.toFixed(2);
-    }
-  });
-
-</script>
