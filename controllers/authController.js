@@ -16,6 +16,7 @@ const registrar = async (req, res) => {
     await nuevoUsuario.save();
 
     req.session.usuarioId = nuevoUsuario._id;
+    req.session.nombreUsuario = nuevoUsuario.nombre; //guardar el nombre en la sesion
     res.redirect('/');
   } catch (err) {
     res.status(500).render('registro', { error: 'Error al registrar' });

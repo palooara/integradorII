@@ -59,6 +59,7 @@ app.use((req, res) =>{
     res.status(404).send('<h1>404-Página no encontrada</h1>');
 });
 
+
 // Middleware para manejar errores internos del servidor
 app.use((err, req, res, next) => {
     console.error( err.stack);

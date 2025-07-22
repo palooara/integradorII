@@ -3,9 +3,8 @@
     <div class="row align-items-center">
 
       <!-- Columna izquierda -->
-      <div class="col d-flex gap-5">
+      <div class="col d-flex gap-4">
         {{#if usuarioLogueado}}
-        <span class="text-white pt-1">{{nombreUsuario}}!</span>
         <a class="nav-link text-white pt-1" href="/auth/logout">Cerrar sesión</a>
         {{else}}
         <a class="nav-link text-white pt-1" href="/auth/login">Iniciar sesión</a>
