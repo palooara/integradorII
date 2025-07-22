@@ -16,5 +16,5 @@ const MONGO_URI = process.env.MONGO_ATLAS;
 connectDB(MONGO_URI);
 
 app.listen(PORT,() => {
-    console.log(`Servidor escuchando en el puerto http://localhost:${PORT}`);
+    console.log(`Servidor escuchando en el puerto ${PORT}`);
 });
