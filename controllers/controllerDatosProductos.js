@@ -23,16 +23,13 @@ const envioProductos = async (req, res) => {
     }
 };
 
-const traerProductos = (req, res) => {
-    datosProducto.find()
-    .then(productos => {
-        console.log("Productos encontrados en la base de datos");
-        res.status(200).json(productos);
-    })
-    .catch(err => {
-        console.error("Error al encontrar los productos", err);
-        res.status(500).send("Error al encontrar los productos");
-    });
+const traerProductos = async (req, res) => {
+    try {
+    const productos = await datosProducto.find(); // asumiendo que usás Mongoose
+    res.render('alta', { productos });
+  } catch (error) {
+    res.status(500).send('Error al obtener productos');
+  }
 };
 
 const eliminarProducto = (req, res) => {
