@@ -75,10 +75,10 @@ document.getElementById("btnEnviar").addEventListener("click", function(e){
 
     if (id) {
         // Editar producto existente
-        xhr.open("PUT", `http://integradorii-1ty1.onrender.com/api/productos/${id}`, true);
+        xhr.open("PUT", `https://integradorii-1ty1.onrender.com/api/productos/${id}`, true);
     } else {
         // Crear nuevo producto
-        xhr.open("POST", "http://integradorii-1ty1.onrender.com/api/productos", true);
+        xhr.open("POST", "https://integradorii-1ty1.onrender.com/api/productos", true);
     }
 
     xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
@@ -99,7 +99,7 @@ document.getElementById("btnEnviar").addEventListener("click", function(e){
 
 function fetchProductosDelServidor() {
     const xhr = new XMLHttpRequest();
-    xhr.open("GET", "http://integradorii-1ty1.onrender.com/api/productos", true);
+    xhr.open("GET", "https://integradorii-1ty1.onrender.com/api/productos", true);
     xhr.onload = function() {
         if (xhr.status === 200) {
             const productos = JSON.parse(xhr.responseText);
@@ -144,7 +144,7 @@ function fetchProductosDelServidor() {
                     const idEliminar = e.target.dataset.id;
                     if (confirm("¿Estás seguro de eliminar este producto?")) {
                         const xhrDelete = new XMLHttpRequest();
-                        xhrDelete.open("DELETE", `http://integradorii-1ty1.onrender.com/api/productos/${idEliminar}`, true);
+                        xhrDelete.open("DELETE", `https://integradorii-1ty1.onrender.com/api/productos/${idEliminar}`, true);
                         xhrDelete.onload = function() {
                             if (xhrDelete.status === 200) {
                                 fetchProductosDelServidor();
