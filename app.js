@@ -49,8 +49,6 @@ const pagesRouter = require('./routes/pagesRouter');
 app.use('/', pagesRouter);
 app.use('/api', apiRouter); //rutas de la API
 app.use('/auth', authRouter); //rutas de autenticación
-const carritoRouter = require('./routes/carritoRouter');
-app.use('/carrito', carritoRouter);
 
 //8. Middleware para manejar errores 404 y 500
 // Middleware para manejar rutas no encontradas

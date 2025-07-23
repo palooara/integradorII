@@ -112,7 +112,7 @@ if (btnAgendar) {
     }
 
     try {
-      const res = await fetch("/carrito", {
+      const res = await fetch("api/carrito", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ productos: carrito })

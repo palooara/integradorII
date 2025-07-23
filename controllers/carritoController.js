@@ -1,7 +1,7 @@
 
 const Carrito = require('../models/carritoModel');
 
-const mostrarCarritoJSON = async (req, res) => {
+const mostrarCarrito = async (req, res) => {
   if (!req.session.usuarioId) {
     return res.status(401).json({ error: 'No autorizado' });
   }
@@ -45,5 +45,5 @@ const agregarCarrito = async (req, res) => {
 
 module.exports = {
     agregarCarrito,
-  mostrarCarritoJSON
+    mostrarCarrito
 };
