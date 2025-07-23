@@ -3,7 +3,7 @@ const router = require ('express').Router();
 const{
     homeApp,
     altaApp,
-    nosotrosApp,
+    nosotrosApp
 } = require('../controllers/controllerRouter')
 
 router.get('/', homeApp);

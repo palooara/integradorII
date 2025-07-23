@@ -17,6 +17,8 @@ const envioProductos = async (req, res) => {
 
         await nuevoProducto.save();
         res.redirect('/');
+
+        console.log("Producto guardado en la base de datos");
         
     } catch (error) {
         res.status(500).json({ error: 'Error al crear el producto' });
@@ -25,8 +27,8 @@ const envioProductos = async (req, res) => {
 
 const traerProductos = async (req, res) => {
     try {
-    const productos = await datosProducto.find(); // asumiendo que usás Mongoose
-    res.render('alta', { productos });
+    const productos = await datosProducto.find(); 
+    res.render('productos', { productos });
   } catch (error) {
     res.status(500).send('Error al obtener productos');
   }
@@ -44,9 +46,6 @@ const eliminarProducto = (req, res) => {
         res.status(500).send("Error al eliminar el producto");
     });
 };
-
-
-
 
 const editarProducto = (req, res) => {
     const id = req.params.id;

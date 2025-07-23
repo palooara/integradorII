@@ -11,9 +11,11 @@ const homeApp = async (req, res) => {
         res.status(500).send('Error al cargar productos');
     }
 };
+
 const altaApp = (req, res) => {
     res.render('alta');
 };
+
 
 const nosotrosApp = (req, res) => {
     res.render('nosotros');

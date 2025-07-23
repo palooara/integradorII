@@ -8,7 +8,7 @@ const app = require('./app');
 const connectDB = require('./conexion/conecctionMongo');
 
 //Importamos el puerto del archivo .env
-const PORT = process.env.PORT || 4000; // Puerto por defecto o el especificado en el archivo .env
+const PORT = process.env.PORT || 3000; // Puerto por defecto o el especificado en el archivo .env
 
 //Importamos la URL de conexión a la base de datos
 const MONGO_URI = process.env.MONGO_ATLAS;
@@ -16,5 +16,5 @@ const MONGO_URI = process.env.MONGO_ATLAS;
 connectDB(MONGO_URI);
 
 app.listen(PORT,() => {
-    console.log(`Servidor escuchando en el puerto ${PORT}`);
+    console.log(`Servidor escuchando en el puerto http://localhost:${PORT}`);
 });

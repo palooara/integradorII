@@ -1,0 +1,89 @@
+<main class="container my-5">
+    <a href="/alta">volver al formulario</a>
+    <div class="text-center mb-4">
+        <h2>Lista de Servicios</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">Categoría</th>
+                    <th scope="col">Descripción</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="tablaProductos">
+                {{#each productos}}
+                <tr>
+                    <td>{{this._id}}</td>
+                    <td>{{this.nombre}}</td>
+                    <td>${{this.precio}}</td>
+                    <td>{{this.categoria}}</td>
+                    <td>{{this.descripcion}}</td>
+                    <td>
+                        <button class="btn btn-warning btn-sm editar-btn" data-id="{{this._id}}"
+                            data-nombre="{{this.nombre}}" data-precio="{{this.precio}}"
+                            data-categoria="{{this.categoria}}" data-descripcion="{{this.descripcion}}">
+                            Editar
+                        </button>
+                        <button class="btn btn-danger btn-sm eliminar-btn" data-id="{{this._id}}">
+                            Eliminar
+                        </button>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+
+</main>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  // Eliminar producto
+  document.querySelectorAll(".eliminar-btn").forEach((btn) => {
+    btn.addEventListener("click", function () {
+      const id = this.dataset.id;
+      if (confirm("¿Estás seguro de eliminar este producto?")) {
+        fetch(`/api/productos/${id}`, {
+          method: "DELETE",
+        })
+          .then((res) => {
+            if (res.ok) {
+              location.reload(); // Recarga para reflejar cambios
+            } else {
+              alert("Error al eliminar el producto");
+            }
+          });
+      }
+    });
+  });
+
+  // Editar producto (ejemplo simple que deberías adaptar)
+  document.querySelectorAll(".editar-btn").forEach((btn) => {
+    btn.addEventListener("click", function () {
+      const id = this.dataset.id;
+      const nombre = prompt("Nuevo nombre:", this.dataset.nombre);
+      const precio = prompt("Nuevo precio:", this.dataset.precio);
+      const categoria = prompt("Nueva categoría:", this.dataset.categoria);
+      const descripcion = prompt("Nueva descripción:", this.dataset.descripcion);
+
+      fetch(`/api/productos/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ nombre, precio, categoria, descripcion }),
+      })
+        .then((res) => {
+          if (res.ok) {
+            location.reload();
+          } else {
+            alert("Error al editar el producto");
+          }
+        });
+    });
+  });
+});
+</script>

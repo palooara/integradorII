@@ -26,48 +26,11 @@
     <button type="submit" style="background-color: #ff6ac6d2;
     border-color: #f44ab3;" class="btn btn-primary" id="btnEnviar">Enviar</button>
 
+    <a href="/api/productos">lista de productos</a>
+
   </form>
 
-  <div class="container mt-5">
-  <h2>Lista de Servicios</h2>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th scope="col">ID</th>
-        <th scope="col">Nombre</th>
-        <th scope="col">Precio</th>
-        <th scope="col">Categoría</th>
-        <th scope="col">Descripción</th>
-        <th scope="col">Acciones</th>
-      </tr>
-    </thead>
-    <tbody id="tablaProductos">
-      {{#each productos}}
-        <tr>
-          <td>{{this._id}}</td>
-          <td>{{this.nombre}}</td>
-          <td>${{this.precio}}</td>
-          <td>{{this.categoria}}</td>
-          <td>{{this.descripcion}}</td>
-          <td>
-            <button class="btn btn-warning btn-sm editar-btn"
-              data-id="{{this._id}}"
-              data-nombre="{{this.nombre}}"
-              data-precio="{{this.precio}}"
-              data-categoria="{{this.categoria}}"
-              data-descripcion="{{this.descripcion}}">
-              Editar
-            </button>
-            <button class="btn btn-danger btn-sm eliminar-btn"
-              data-id="{{this._id}}">
-              Eliminar
-            </button>
-          </td>
-        </tr>
-      {{/each}}
-    </tbody>
-  </table>
-</div>
+
 
 
 </main>
