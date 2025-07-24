@@ -3,10 +3,37 @@ const Usuario = require('../models/datosUsuarioModel');
 const mostrarLogin = (req, res) => res.render('login');
 const mostrarRegistro = (req, res) => res.render('registro');
 
+//validaciones con joi
+const Joi = require('joi');
 
+//importamios librería de json web token
+const jwt = require('jsonwebtoken');
 
 const registrar = async (req, res) => {
   const { email, password, nombre, telefono } = req.body;
+
+  const registroSchema = Joi.object({
+    email: Joi.string().email().required().messages({
+      'string.email': 'El email debe ser válido',
+      'string.empty': 'El email es obligatorio'
+    }),
+    password: Joi.string().min(8).required().messages({
+      'string.min': 'La contraseña debe tener al menos 8 caracteres',
+      'string.empty': 'La contraseña es obligatoria'
+    }),
+    nombre: Joi.string().required().messages({
+      'string.empty': 'El nombre es obligatorio'
+    }),
+    telefono: Joi.string().required().messages({
+      'string.empty': 'El teléfono es obligatorio'
+    })
+  });
+
+  const { error } = registroSchema.validate({ email, password, nombre, telefono }, { abortEarly: false });
+  if (error) {
+    const mensajes = error.details.map(e => e.message);
+    return res.render('registro', { error: mensajes.join('. ') });
+  }
 
   try {
     const existente = await Usuario.findOne({ email });
@@ -28,6 +55,25 @@ const login = async (req, res) => {
 
   try {
     const usuario = await Usuario.findOne({ email });
+
+    const loginSchema = Joi.object({
+
+      email: Joi.string().email().required().messages({
+        'string.email': 'El email debe ser válido',
+        'string.empty': 'El email es obligatorio'
+      }),
+      password: Joi.string().min(8).required().messages({
+        'string.min': 'La contraseña debe tener al menos 8 caracteres',
+        'string.empty': 'La contraseña es obligatoria'
+      })
+
+    });
+
+    const { error } = loginSchema.validate({ email, password }, { abortEarly: false });
+    if (error) {
+      const mensajes = error.details.map(e => e.message);
+      return res.render('login', { error: mensajes.join('. ') });
+    }
 
     if (!usuario) {
       return res.render('login', { error: 'El usuario no existe' });
