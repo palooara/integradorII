@@ -58,8 +58,8 @@ const editarProducto = (req, res) => {
     };
     
     datosProducto.findByIdAndUpdate(id, producto, { new: true })
-    .then((contactoActualizado) => {
-        if (!contactoActualizado) {
+    .then((productoActualizado) => {
+        if (!productoActualizado) {
             return res.status(404).send("producto no encontrado");
         }
         console.log("producto actualizado en la base de datos");
