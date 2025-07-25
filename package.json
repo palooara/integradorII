@@ -30,12 +30,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/palooara/integradorII.git"
+    "url": "git+https://github.com/palooara/integradorii.git"
   },
   "bugs": {
-    "url": "https://github.com/palooara/integradorII/issues"
+    "url": "https://github.com/palooara/integradorii/issues"
   },
-  "homepage": "https://github.com/palooara/integradorII#readme",
+  "homepage": "https://github.com/palooara/integradorii#readme",
   "author": "",
   "license": "ISC"
 }
