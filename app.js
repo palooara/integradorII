@@ -22,7 +22,7 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   store: MongoStore.create({
-    mongoUrl: process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/integradorii',
+    mongoUrl: process.env.MONGO_ATLAS,
     ttl: 60 * 60 * 24 // sesión dura 1 día (en segundos)
   }),
   cookie: {
