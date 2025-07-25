@@ -4,7 +4,7 @@ const mostrarLogin = (req, res) => res.render('login');
 const mostrarRegistro = (req, res) => res.render('registro');
 
 //validaciones con joi
-const Joi = require('joi');
+const Joi = require('joi'); //importamos joi para validaciones
 
 //importamios librería de json web token
 const jwt = require('jsonwebtoken');
