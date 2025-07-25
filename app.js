@@ -8,6 +8,9 @@ const path = require('path'); //librería para trabajar con rutas
 const apiRouter = require('./routes/datosProductosRouter'); //rutas de la API
 const authRouter = require('./routes/authRouter'); //rutas de autenticación
 
+const MongoStore = require('connect-mongo');
+require('dotenv').config(); 
+
 const session = require('express-session');
 
 
@@ -19,9 +22,16 @@ app.use(morgan('dev')); //registrar las peticiones HTTP en la consola
 app.use(express.json()); //parsear el cuerpo de las peticiones a JSON
 
 app.use(session({
-  secret: 'clave-super-secreta',
+  secret: process.env.SESSION_SECRET, 
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: false,
+  store: MongoStore.create({
+    mongoUrl: process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/IntegradorII',
+    ttl: 60 * 60 * 24 // sesión dura 1 día (en segundos)
+  }),
+  cookie: {
+    maxAge: 1000 * 60 * 60 * 24 // cookie también dura 1 día
+  }
 }));
 
 app.use((req, res, next) => {

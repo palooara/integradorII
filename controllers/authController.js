@@ -37,6 +37,7 @@ const registrar = async (req, res) => {
 
   try {
     const existente = await Usuario.findOne({ email });
+
     if (existente) return res.render('registro', { error: 'Email ya registrado' });
 
     const nuevoUsuario = new Usuario({ email, password, nombre, telefono });
@@ -86,12 +87,19 @@ const login = async (req, res) => {
     }
 
     req.session.usuarioId = usuario._id;
-    req.session.nombreUsuario = usuario.nombre; //guardar el nombre en la sesion
+    req.session.nombreUsuario = usuario.nombre;
+
     res.redirect('/');
+
   } catch (err) {
     console.error('Error en login:', err);
     res.status(500).render('login', { error: 'Error interno en el login' });
   }
+
+
+
+
+  
 };
 
 
