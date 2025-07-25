@@ -5,12 +5,8 @@ const express = require('express'); //framework para crear servidores
 const morgan = require('morgan');// middleware para registrar las peticiones HTTP
 const hbs = require('hbs');// motor de plantillas para renderizar html
 const path = require('path'); //librería para trabajar con rutas
-const apiRouter = require('./routes/datosProductosRouter'); //rutas de la API
-const authRouter = require('./routes/authRouter'); //rutas de autenticación
-
 const MongoStore = require('connect-mongo');
 require('dotenv').config(); 
-
 const session = require('express-session');
 
 
@@ -36,7 +32,7 @@ app.use(session({
 
 app.use((req, res, next) => {
   res.locals.usuarioLogueado = req.session.usuarioId || null;
-  res.locals.nombreUsuario = req.session.nombreUsuario || null; // ← Esto también
+  res.locals.nombreUsuario = req.session.nombreUsuario || null;
   next();
 });
 
@@ -53,12 +49,14 @@ app.set('views', path.join(__dirname, 'views')); //configurar la carpeta de vist
 hbs.registerPartials(path.join(__dirname, 'views/partials'));
 
 // 6. Importamos las rutas
-const pagesRouter = require('./routes/pagesRouter');
+const apiRouter = require('./routes/datosProductosRouter'); //rutas de la API
+const authRouter = require('./routes/authRouter'); //rutas de autenticación
+const pagesRouter = require('./routes/pagesRouter');// rutas a las páginas
 
 //7. Usamos las rutas
-app.use('/', pagesRouter);
 app.use('/api', apiRouter); //rutas de la API
 app.use('/auth', authRouter); //rutas de autenticación
+app.use('/', pagesRouter); // rutas a las páginas
 
 //8. Middleware para manejar errores 404 y 500
 // Middleware para manejar rutas no encontradas

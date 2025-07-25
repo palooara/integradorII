@@ -72,8 +72,6 @@ const editarProducto = (req, res) => {
 };
 
 
-
-
 module.exports = {
     envioProductos,
     eliminarProducto,
